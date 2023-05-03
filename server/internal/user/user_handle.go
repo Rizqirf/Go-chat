@@ -8,7 +8,7 @@ import (
 	"github.com/labstack/echo"
 )
 
-var lock = sync.Mutex{}
+var (lock = sync.Mutex{})
 
 type Handler struct {
 	Service
