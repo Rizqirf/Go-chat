@@ -24,13 +24,13 @@ func(h *Handler) CreateUser(c echo.Context) error {
 	lock.Lock()
 	defer lock.Unlock()
 
-	var u CreateUserReq
+	var user CreateUserReq
 
-	if err := c.Bind(&u); err != nil {
+	if err := c.Bind(&user); err != nil {
 		return c.JSON(http.StatusBadRequest, err)
 	}
 
-	res, err := h.Service.CreateUser(c.Request().Context(), &u)
+	res, err := h.Service.CreateUser(c.Request().Context(), &user)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err)
 	}
