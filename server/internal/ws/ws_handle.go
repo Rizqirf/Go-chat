@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
-	"sync"
+
+	// "sync"
 
 	"github.com/gorilla/websocket"
 	"github.com/labstack/echo"
@@ -12,7 +13,7 @@ import (
 
 
 var (
-	lock = sync.Mutex{}
+	// lock = sync.Mutex{}
 	roomIdSeq = 0
 )
 
@@ -45,8 +46,8 @@ type GetClientsRes struct {
 }
 
 func(h *Handler) CreateRoom (c echo.Context) error {
-	lock.Lock()
-	defer lock.Unlock()
+	// lock.Lock()
+	// defer lock.Unlock()
 
 	var req CreateRoomReq
 
@@ -83,8 +84,8 @@ var upgrader = websocket.Upgrader{
 }
 
 func(h *Handler) JoinRoom (c echo.Context) error {
-	lock.Lock()
-	defer lock.Unlock()
+	// lock.Lock()
+	// defer lock.Unlock()
 
 	conn,err := upgrader.Upgrade(c.Response().Writer,c.Request(),nil)
 	if err != nil {
@@ -119,8 +120,8 @@ func(h *Handler) JoinRoom (c echo.Context) error {
 }
 
 func (h *Handler) GetRooms (c echo.Context) error {
-	lock.Lock()
-	defer lock.Unlock()
+	// lock.Lock()
+	// defer lock.Unlock()
 
 	rooms := make([]GetRoomsRes,0)
 
@@ -135,8 +136,8 @@ func (h *Handler) GetRooms (c echo.Context) error {
 }
 
 func (h *Handler) GetClients (c echo.Context) error {
-	lock.Lock()
-	defer lock.Unlock()
+	// lock.Lock()
+	// defer lock.Unlock()
 	
 	var clients []GetClientsRes
 	roomId := c.Param("roomId")
