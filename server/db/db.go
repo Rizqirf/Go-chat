@@ -10,8 +10,13 @@ type Database struct {
 	db *sql.DB
 }
 
+const (
+	devDB = "postgresql://postgres:password@localhost:5432/go-chat?sslmode=disable"
+	prodDB = "postgresql://root:password@localhost:5433/go-chat?sslmode=disable"
+)
+
 func NewDatabase() (*Database, error) {
-	db, err := sql.Open("postgres", "postgresql://postgres:password@localhost:5432/go-chat?sslmode=disable")
+	db, err := sql.Open("postgres", prodDB)
 	if err != nil {
 		return nil, err
 	}
